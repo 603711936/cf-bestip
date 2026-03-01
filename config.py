@@ -43,8 +43,8 @@ MAX_PROXIES_PER_REGION = 6
 # ======================
 # 代理检测 API
 # ======================
-PROXY_CHECK_API_URL = "https://prcheck.ittool.pp.ua/check"
-PROXY_CHECK_API_TOKEN = "588wbb"
+PROXY_CHECK_API_URL = "https://check.603711936.xyz/check"
+PROXY_CHECK_API_TOKEN = "admin123456"
 
 # ======================
 # 地区配置（完整版）
