@@ -31,7 +31,7 @@ def check_proxy_with_api(proxy_info):
     start = time.time()
 
     try:
-        params = {"proxy": proxy_url}
+        params = {"proxyip": proxy_url}
         if PROXY_CHECK_API_TOKEN:
             params["token"] = PROXY_CHECK_API_TOKEN
 
