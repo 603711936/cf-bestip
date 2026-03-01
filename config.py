@@ -19,7 +19,7 @@ DATA_DIR = os.path.join(OUTPUT_DIR, "data")
 # ======================
 CF_IPS_V4_URL = "https://www.cloudflare.com/ips-v4"
 
-TRACE_DOMAIN = "https://speed.cloudflare.com"
+TRACE_DOMAIN = "sptest.ittool.pp.ua"
 
 HTTPS_PORTS = [443, 8443, 2053, 2083, 2087, 2096]
 
@@ -79,7 +79,7 @@ COLO_MAP = {
     # 亚太
     "HKG": "HK",  # 香港
     "SIN": "SG",  # 新加坡
-    "NRT": "JP", "KIX": "JP", "HND": "JP",  # 日本
+    "NRT": "JP"， "KIX": "JP", "HND": "JP",  # 日本
     "ICN": "KR", "GMP": "KR",  # 韩国
     "TPE": "TW",  # 台湾
     "SYD": "AU", "MEL": "AU", "BNE": "AU", "PER": "AU",  # 澳大利亚
@@ -111,7 +111,7 @@ COLO_MAP = {
     "ARN": "SE", "STO": "SE",  # 瑞典
     "HEL": "FI",  # 芬兰
     "WAW": "PL",  # 波兰
-    "PRG": "CZ",  # 捷克
+    "PRG": "CZ"，  # 捷克
     "BUD": "HU",  # 匈牙利
     "OTP": "RO",  # 罗马尼亚
     "ATH": "GR",  # 希腊
@@ -164,8 +164,8 @@ COUNTRY_TO_REGION = {
     "AU": "SG",  # 澳大利亚 → 新加坡
     "TH": "SG",  # 泰国 → 新加坡
     "MY": "SG",  # 马来西亚 → 新加坡
-    "PH": "SG"，  # 菲律宾 → 新加坡
-    "ID": "SG"，  # 印尼 → 新加坡
+    "PH": "SG",  # 菲律宾 → 新加坡
+    "ID": "SG",  # 印尼 → 新加坡
     "VN": "SG",  # 越南 → 新加坡
     "CN": "HK",  # 中国 → 香港
     
@@ -189,7 +189,7 @@ COUNTRY_TO_REGION = {
     "QA": "IN",  # 卡塔尔 → 印度
     "SA": "IN",  # 沙特 → 印度
     
-    "BR": "US"，  # 巴西 → 美国
+    "BR": "US",  # 巴西 → 美国
     "AR": "US",  # 阿根廷 → 美国
     "CL": "US",  # 智利 → 美国
     "MX": "US",  # 墨西哥 → 美国
