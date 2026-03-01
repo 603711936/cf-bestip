@@ -6,7 +6,6 @@ import time
 import subprocess
 import ipaddress
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
 from config import *
 from proxy_sources import (
     ProxyInfo,
