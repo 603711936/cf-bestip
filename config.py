@@ -19,7 +19,7 @@ DATA_DIR = os.path.join(OUTPUT_DIR, "data")
 # ======================
 CF_IPS_V4_URL = "https://www.cloudflare.com/ips-v4"
 
-TRACE_DOMAIN = "sptest.ittool.pp.ua"
+TRACE_DOMAIN = "https://speed.cloudflare.com"
 
 HTTPS_PORTS = [443, 8443, 2053, 2083, 2087, 2096]
 
