@@ -43,7 +43,7 @@ MAX_PROXIES_PER_REGION = 6
 # ======================
 # 代理检测 API
 # ======================
-PROXY_CHECK_API_URL = "https://check.603711936.xyz/check"
+PROXY_CHECK_API_URL = "https://check.603711936.us.ci/check"
 PROXY_CHECK_API_TOKEN = "admin123456"
 
 # ======================
@@ -110,7 +110,7 @@ COLO_MAP = {
     "OSL": "NO",  # 挪威
     "ARN": "SE", "STO": "SE",  # 瑞典
     "HEL": "FI",  # 芬兰
-    "WAW": "PL",  # 波兰
+    "WAW": "PL"，  # 波兰
     "PRG": "CZ",  # 捷克
     "BUD": "HU",  # 匈牙利
     "OTP": "RO",  # 罗马尼亚
