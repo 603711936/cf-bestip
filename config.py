@@ -79,7 +79,7 @@ COLO_MAP = {
     # 亚太
     "HKG": "HK",  # 香港
     "SIN": "SG",  # 新加坡
-    "NRT": "JP"， "KIX": "JP", "HND": "JP",  # 日本
+    "NRT": "JP", "KIX": "JP", "HND": "JP",  # 日本
     "ICN": "KR", "GMP": "KR",  # 韩国
     "TPE": "TW",  # 台湾
     "SYD": "AU", "MEL": "AU", "BNE": "AU", "PER": "AU",  # 澳大利亚
@@ -111,7 +111,7 @@ COLO_MAP = {
     "ARN": "SE", "STO": "SE",  # 瑞典
     "HEL": "FI",  # 芬兰
     "WAW": "PL",  # 波兰
-    "PRG": "CZ"，  # 捷克
+    "PRG": "CZ",  # 捷克
     "BUD": "HU",  # 匈牙利
     "OTP": "RO",  # 罗马尼亚
     "ATH": "GR",  # 希腊
