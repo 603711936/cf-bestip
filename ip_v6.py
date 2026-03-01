@@ -27,9 +27,9 @@ logging.basicConfig(
 CF_IPS_V4_URL = "https://www.cloudflare.com/ips-v4"
 
 TRACE_DOMAINS = {
-    "v0": "sptest.ittool.pp.ua",
-    "v1": "sptest1.ittool.pp.ua",
-    "v2": "sptest2.ittool.pp.ua",
+    "v0": "cloudflare.com",
+    "v1": "www.cloudflare.com",
+    "v2": "speed.cloudflare.com",
 }
 
 SAMPLE_SIZE = 600
