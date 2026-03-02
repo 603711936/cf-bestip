@@ -12,6 +12,8 @@
 
 </div>
 
+ps：config.py里的TRACE_DOMAIN、PROXY_CHECK_API_URL已被我关闭，fork项目后需自行更改地址进行使用
+
 ---
 
 ## 📑 目录
