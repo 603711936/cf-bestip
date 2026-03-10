@@ -9,12 +9,19 @@
 
 **自动化 Cloudflare IPv4 Anycast IP 探测、测速、评分与区域归类工具**
 
-[在线演示](https://zoroaaa.github.io/cf-bestip/) | [快速开始](#快速开始) | [配置说明](#配置说明) | [API 文档](#api-说明)
-
 </div>
 
 ps：config.py里的TRACE_DOMAIN、PROXY_CHECK_API_URL已被我关闭，fork项目后需自行更改地址进行使用
+## 🔗 快速访问
 
+<div align="center">
+
+| 资源类型 | 链接 | 备注 |
+|---------|------|------|
+| 📖 项目文档 | 👉 [完整介绍](https://zread.ai/Zoroaaa/cf-bestip) | 详细的项目说明和使用指南 |
+| 🚀 在线体验 | 👉 [https://zoroaaa.github.io/cf-bestip](https://zoroaaa.github.io/cf-bestip) | 体验完整功能 |
+
+</div>
 ---
 
 ## 📑 目录
