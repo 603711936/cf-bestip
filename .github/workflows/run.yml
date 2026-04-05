@@ -99,6 +99,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
           PYTHONDONTWRITEBYTECODE: "1"
           WEBSHARE_TOKEN: ${{ secrets.WEBSHARE_TOKEN }}
+          PROXY_CHECK_API_URL: ${{ secrets.PROXY_CHECK_API_URL }}
           PROXY_CHECK_API_TOKEN: ${{ secrets.PROXY_CHECK_API_TOKEN }}
         timeout-minutes: 90
 
