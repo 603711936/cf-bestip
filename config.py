@@ -44,7 +44,7 @@ MAX_PROXIES_PER_REGION = 6
 # 代理检测 API
 # ======================
 PROXY_CHECK_API_URL = "https://check.603711936.us.ci/check"
-PROXY_CHECK_API_TOKEN = "admin123456"
+PROXY_CHECK_API_TOKEN = os.getenv("PROXY_CHECK_API_TOKEN", "")
 
 # ======================
 # 地区配置（完整版）
