@@ -18,10 +18,19 @@ from proxy_sources import (
 
 
 def check_proxy_with_api(proxy_info):
-    """使用API检测代理的可用性和信息"""
-    if not PROXY_CHECK_API_URL:
-        logging.error("未配置 PROXY_CHECK_API_URL,无法检测代理")
-        return {"success": False, "latency": 999999}
+    """使用API检测代理的可用性和信息（支持多URL fallback）"""
+    # 新版优先使用 PROXY_CHECK_API_URLS（可配置多个）；旧版保持兼容
+    urls = []
+    try:
+        urls = list(PROXY_CHECK_API_URLS)  # from config.py
+    except Exception:
+        urls = []
+
+    if not urls:
+        if not PROXY_CHECK_API_URL:
+            logging.error("未配置 PROXY_CHECK_API_URL,无法检测代理")
+            return {"success": False, "latency": 999999}
+        urls = [PROXY_CHECK_API_URL]
 
     if proxy_info.type in ["socks5", "socks4"]:
         proxy_url = f"socks5://{proxy_info.host}:{proxy_info.port}"
@@ -35,21 +44,39 @@ def check_proxy_with_api(proxy_info):
         if PROXY_CHECK_API_TOKEN:
             params["token"] = PROXY_CHECK_API_TOKEN
 
-        response = requests.get(
-            PROXY_CHECK_API_URL,
-            params=params,
-            timeout=PROXY_TEST_TIMEOUT + 2
-        )
+        last_exc = None
+        response = None
+        used_url = None
+
+        # 依次尝试多个 API URL，直到成功拿到 200 且 success=true
+        for api_url in urls:
+            try:
+                used_url = api_url
+                response = requests.get(
+                    api_url,
+                    params=params,
+                    timeout=PROXY_TEST_TIMEOUT + 2
+                )
+
+                if response.status_code != 200:
+                    continue
+
+                result = response.json()
+                if not result.get("success"):
+                    continue
+
+                # 成功
+                break
+            except Exception as e:
+                last_exc = e
+                continue
+        else:
+            # 全部 URL 都失败
+            if last_exc:
+                logging.debug(f"代理 {proxy_info.host}:{proxy_info.port} API检测失败: {last_exc}")
+            return {"success": False, "latency": 999999, "https_ok": False}
 
         latency = int((time.time() - start) * 1000)
-
-        if response.status_code != 200:
-            return {"success": False, "latency": 999999, "https_ok": False}
-
-        result = response.json()
-
-        if not result.get("success"):
-            return {"success": False, "latency": 999999, "https_ok": False}
 
         location = result.get("location", {})
         country_code = location.get("country_code", "UNKNOWN")
