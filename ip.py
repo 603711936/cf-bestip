@@ -126,6 +126,7 @@ def curl_test(ip, proxy=None):
             "colo": colo,
             "region": region,
             "latency": latency,
+            "port": 443,
             "proxy": f"{proxy.host}:{proxy.port}({proxy.type})" if proxy else "direct"
         }
 
@@ -137,11 +138,18 @@ def curl_test(ip, proxy=None):
 
 
 def test_ip(ip, proxy=None):
-    """现在只测一个域名"""
-    result = curl_test(ip, proxy)
-    if result:
-        return [result]
-    return []
+    """多次采样拼质量：同一个 IP 测 {IP_SAMPLES} 次，只有每次都连得上才算数。
+
+    • 任一次失败 → 直接剔掉（不稳定的 IP 不要）
+    • 多次结果全部回传，aggregate 阶段用中位数+抖动打分
+    """
+    results = []
+    for _ in range(IP_SAMPLES):
+        r = curl_test(ip, proxy)
+        if not r:
+            return []          # 只要有一次不通，这个 IP 直接放弃
+        results.append(r)
+    return results
 
 
 def weighted_random_ips(cidrs, total):
@@ -164,35 +172,54 @@ def weighted_random_ips(cidrs, total):
 
 
 def score_ip(latencies):
-    """单域名后 latencies 长度最多为1"""
+    """质量评分：不只看快不快，还看稳不稳。
+
+    • 基准分用中位数延迟（比均值抗单次抑峰）
+    • 多次采样时，根据抖动（最大-最小）摩减分数：延迟飘得越厉，扣得越多
+    """
     if not latencies:
         return 0
 
-    lat = latencies[0]
-    score = 1 / (1 + lat / 200)
-    score = round(score, 4)
-    return score
+    lats = sorted(latencies)
+    n = len(lats)
+    median = lats[n // 2] if n % 2 else (lats[n // 2 - 1] + lats[n // 2]) / 2
+
+    # 质量门槛：中位数延迟太高直接判 0 分（后续会被剔除）
+    if median > QUALITY_LATENCY_MAX:
+        return 0
+
+    base = 1 / (1 + median / 200)
+
+    # 稳定性惩罚：多次采样才生效（单次无抖动）
+    if n >= 2:
+        jitter = lats[-1] - lats[0]
+        # 抖动 0ms 不扣；每 100ms 抖动约扣 10%，抖动大于~900ms 的最多扣到 0.4
+        stability = max(0.4, 1 - jitter / 1000)
+        base *= stability
+
+    return round(base, 4)
 
 
 def aggregate_nodes(raw):
     ip_map = defaultdict(list)
     for r in raw:
-        ip_map[r["ip"]].append(r)
+        ip_map[(r["ip"], r["port"])].append(r)
 
     nodes = []
-    for ip, items in ip_map.items():
+    for (ip, port), items in ip_map.items():
         latencies = [x["latency"] for x in items]
         score = score_ip(latencies)
-        if score <= 0:
+        if score < MIN_SCORE:
             continue
 
         best = min(items, key=lambda x: x["latency"])
         nodes.append({
             "ip": ip,
-            "port": random.choice(HTTPS_PORTS),
+            "port": port,
             "region": best["region"],
             "colo": best["colo"],
             "latencies": latencies,
+            "samples": len(latencies),
             "score": score
         })
 

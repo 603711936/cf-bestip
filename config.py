@@ -33,6 +33,16 @@ CONNECT_TIMEOUT = 5
 MAX_WORKERS = 24
 LATENCY_LIMIT = 1300
 
+# ======================
+# 质量优先参数（量少但精）
+# ======================
+# 每个 IP 重复采样次数：全部通过才算合格，用于评估稳定性/抖动
+IP_SAMPLES = 3
+# 质量门槛：中位数延迟高于此值的节点直接剔除（比 LATENCY_LIMIT 严得多）
+QUALITY_LATENCY_MAX = 600
+# 质量门槛：最终输出最低评分（低于此值的不写入）
+MIN_SCORE = 0.30
+
 PROXY_TEST_TIMEOUT = 10
 PROXY_MAX_LATENCY = 1500
 SOCKS5_MAX_LATENCY = 1500

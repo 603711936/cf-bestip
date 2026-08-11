@@ -109,108 +109,98 @@ jobs:
       - name: Verify output files
         if: github.event.inputs.test_mode != 'true'
         run: |
-          echo "📁 检查输出文件..."
-          ls -lh public/
-          
-          echo ""
-          echo "=== 核心文件检查 ==="
-          
-          # 检查 IP 总列表
-          if [ -f "public/ip_all.txt" ]; then
-            echo "✅ ip_all.txt 存在"
-            LINE_COUNT=$(wc -l < public/ip_all.txt)
-            echo "   总行数: $LINE_COUNT"
-          else
-            echo "::error::ip_all.txt 缺失"
-            exit 1
-          fi
-          
-          # 检查代理总列表
-          if [ -f "public/proxy_all.txt" ]; then
-            echo "✅ proxy_all.txt 存在"
-            PROXY_COUNT=$(wc -l < public/proxy_all.txt)
-            echo "   总行数: $PROXY_COUNT"
-          else
-            echo "⚠️ proxy_all.txt 不存在"
-          fi
-          
-          # 检查 JSON
-          if [ -f "public/ip_candidates.json" ]; then
-            echo "✅ ip_candidates.json 存在"
-            echo "   预览内容:"
-            cat public/ip_candidates.json | python -m json.tool | head -30
-          else
-            echo "::error::ip_candidates.json 缺失"
-            exit 1
-          fi
-          
-          # 检查 HTML (修复 stat 命令)
-          if [ -f "public/index.html" ]; then
-            echo "✅ index.html 存在"
-            SIZE=$(stat -c%s public/index.html 2>/dev/null || echo "unknown")
-            echo "   文件大小: $SIZE bytes"
-          else
-            echo "::error::index.html 缺失"
-            exit 1
-          fi
-          
-          echo ""
-          echo "=== 各地区文件统计 ==="
-          
-          # 统计 IP 文件
-          echo "📍 IP 文件:"
-          for file in public/ip_*.txt; do
-            if [ -f "$file" ] && [ "$file" != "public/ip_all.txt" ]; then
-              filename=$(basename "$file")
-              count=$(wc -l < "$file" 2>/dev/null || echo "0")
-              echo "  $filename: $count 行"
-            fi
-          done
-          
-          # 统计代理文件
-          echo ""
-          echo "🔑 代理文件:"
-          for file in public/proxy_*.txt; do
-            if [ -f "$file" ] && [ "$file" != "public/proxy_all.txt" ]; then
-              filename=$(basename "$file")
-              count=$(wc -l < "$file" 2>/dev/null || echo "0")
-              echo "  $filename: $count 行"
-            fi
-          done
+          python << 'PYEOF'
+          import os, sys, json
+
+          pub = "public"
+          missing = []
+
+          def line_count(path):
+              try:
+                  with open(path, "r", encoding="utf-8") as fh:
+                      return sum(1 for _ in fh)
+              except OSError:
+                  return 0
+
+          print("检查输出文件...")
+
+          # 必需文件（缺失才算失败，用普通文本报告，避免日志里出现误导性红色 error 行）
+          required = {
+              "ip_all.txt": "IP 总列表",
+              "ip_candidates.json": "JSON 数据",
+              "index.html": "网页",
+          }
+          for name, desc in required.items():
+              path = os.path.join(pub, name)
+              if os.path.isfile(path) and os.path.getsize(path) > 0:
+                  size = os.path.getsize(path)
+                  print(f"  OK  {name} ({desc}) - {size} bytes")
+              else:
+                  missing.append(name)
+                  print(f"  BAD {name} ({desc}) 缺失或为空")
+
+          # 可选文件
+          proxy_all = os.path.join(pub, "proxy_all.txt")
+          if os.path.isfile(proxy_all):
+              print(f"  OK  proxy_all.txt - {line_count(proxy_all)} 行")
+          else:
+              print("  --  proxy_all.txt 不存在（可选）")
+
+          # JSON 快速校验
+          jpath = os.path.join(pub, "ip_candidates.json")
+          if os.path.isfile(jpath):
+              try:
+                  with open(jpath, encoding="utf-8") as fh:
+                      data = json.load(fh)
+                  print(f"  JSON 节点数: {data.get('meta', {}).get('total_nodes', 0)}")
+              except Exception as e:
+                  print(f"  JSON 解析异常: {e}")
+                  missing.append("ip_candidates.json(parse)")
+
+          print("")
+          print("各地区 IP 文件:")
+          for f in sorted(os.listdir(pub)):
+              if f.startswith("ip_") and f.endswith(".txt") and f != "ip_all.txt":
+                  print(f"  {f}: {line_count(os.path.join(pub, f))} 行")
+
+          print("各地区代理文件:")
+          for f in sorted(os.listdir(pub)):
+              if f.startswith("proxy_") and f.endswith(".txt") and f != "proxy_all.txt":
+                  print(f"  {f}: {line_count(os.path.join(pub, f))} 行")
+
+          if missing:
+              # 只有在真的缺文件时，才发一条 GitHub Actions 错误注解
+              print(f"::error::核心输出文件缺失: {', '.join(missing)}")
+              sys.exit(1)
+
+          print("")
+          print("所有核心输出文件校验通过")
+          PYEOF
 
       - name: Validate HTML output
         if: github.event.inputs.test_mode != 'true'
         run: |
-          echo "🔍 验证 HTML 文件..."
-          
-          if [ ! -f "public/index.html" ]; then
-            echo "::error::index.html 不存在，无法验证"
-            ls -la public/
-            exit 1
-          fi
-          
-          # 检查 HTML 文件是否包含关键内容
-          if grep -q "Cloudflare IP 优选" public/index.html; then
-            echo "✅ HTML 标题正确"
-          else
-            echo "⚠️ HTML 标题可能不正确"
-          fi
-          
-          if grep -q "region-card" public/index.html; then
-            echo "✅ HTML 包含地区卡片"
-          else
-            echo "⚠️ HTML 可能缺少地区卡片"
-          fi
-          
-          if grep -q "proxy-item" public/index.html; then
-            echo "✅ HTML 包含代理信息"
-          else
-            echo "⚠️ HTML 可能缺少代理信息"
-          fi
-          
-          # 显示 HTML 文件大小 (修复 stat 命令)
-          SIZE=$(stat -c%s public/index.html 2>/dev/null || echo "unknown")
-          echo "📊 HTML 文件大小: $SIZE bytes"
+          python << 'PYEOF'
+          import os, sys
+
+          path = "public/index.html"
+          if not (os.path.isfile(path) and os.path.getsize(path) > 0):
+              print("::error::index.html 不存在或为空，无法验证")
+              sys.exit(1)
+
+          with open(path, encoding="utf-8", errors="ignore") as fh:
+              html = fh.read()
+
+          checks = {
+              "标题": "Cloudflare IP 优选" in html,
+              "地区卡片": "region-card" in html,
+              "代理信息": "proxy-item" in html,
+          }
+          for name, ok in checks.items():
+              print(f"  {'OK ' if ok else '-- '} {name}{'' if ok else ' （未检测到，不致命）'}")
+
+          print(f"HTML 文件大小: {os.path.getsize(path)} bytes")
+          PYEOF
 
       - name: Create .nojekyll
         if: github.event.inputs.test_mode != 'true'
