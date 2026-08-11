@@ -103,6 +103,7 @@ jobs:
           # This prevents the whole workflow from failing when one custom domain has DNS issues.
           PROXY_CHECK_API_URL: ${{ secrets.PROXY_CHECK_API_URL || 'https://check.603711936.indevs.in/check' }}
           PROXY_CHECK_API_TOKEN: ${{ secrets.PROXY_CHECK_API_TOKEN }}
+          # 注: 自检阶段若代理源返回 403 / 抽样代理均不可用，脚本会记 WARNING 并靠核心项继续，不会致命
         timeout-minutes: 90
 
       - name: Verify output files
@@ -120,7 +121,8 @@ jobs:
             LINE_COUNT=$(wc -l < public/ip_all.txt)
             echo "   总行数: $LINE_COUNT"
           else
-            echo "❌ ip_all.txt 不存在"
+            echo "::error::ip_all.txt 缺失"
+            exit 1
           fi
           
           # 检查代理总列表
@@ -138,7 +140,8 @@ jobs:
             echo "   预览内容:"
             cat public/ip_candidates.json | python -m json.tool | head -30
           else
-            echo "❌ ip_candidates.json 不存在"
+            echo "::error::ip_candidates.json 缺失"
+            exit 1
           fi
           
           # 检查 HTML (修复 stat 命令)
@@ -147,7 +150,8 @@ jobs:
             SIZE=$(stat -c%s public/index.html 2>/dev/null || echo "unknown")
             echo "   文件大小: $SIZE bytes"
           else
-            echo "❌ index.html 不存在"
+            echo "::error::index.html 缺失"
+            exit 1
           fi
           
           echo ""
@@ -180,7 +184,7 @@ jobs:
           echo "🔍 验证 HTML 文件..."
           
           if [ ! -f "public/index.html" ]; then
-            echo "❌ index.html 不存在，尝试检查原因..."
+            echo "::error::index.html 不存在，无法验证"
             ls -la public/
             exit 1
           fi
@@ -354,31 +358,32 @@ jobs:
             
             console.log(`Deleted ${deleted} old artifacts`);
 
-      - name: Notification
-        if: always()
+      - name: Notification (success)
+        if: always() && job.status == 'success'
         run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "✅ 工作流执行成功"
-            echo ""
-            echo "📊 结果摘要:"
-            
-            if [ -f "public/ip_all.txt" ]; then
-              IP_COUNT=$(wc -l < public/ip_all.txt)
-              echo "  - IP节点: $IP_COUNT"
-            fi
-            
-            if [ -f "public/proxy_all.txt" ]; then
-              PROXY_COUNT=$(wc -l < public/proxy_all.txt)
-              echo "  - 代理节点: $PROXY_COUNT"
-            fi
-            
-            if [ -f "public/index.html" ]; then
-              echo "  - HTML页面: ✅ 已生成"
-            fi
-            
-            echo ""
-            echo "🌐 访问: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-          else
-            echo "❌ 工作流执行失败"
-            echo "请查看日志了解详细信息"
+          echo "✅ 工作流执行成功"
+          echo ""
+          echo "📊 结果摘要:"
+
+          if [ -f "public/ip_all.txt" ]; then
+            IP_COUNT=$(wc -l < public/ip_all.txt)
+            echo "  - IP节点: $IP_COUNT"
           fi
+
+          if [ -f "public/proxy_all.txt" ]; then
+            PROXY_COUNT=$(wc -l < public/proxy_all.txt)
+            echo "  - 代理节点: $PROXY_COUNT"
+          fi
+
+          if [ -f "public/index.html" ]; then
+            echo "  - HTML页面: ✅ 已生成"
+          fi
+
+          echo ""
+          echo "🌐 访问: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      - name: Notification (failure)
+        if: always() && job.status != 'success'
+        run: |
+          echo "工作流未成功完成 (job.status=${{ job.status }})"
+          echo "请查看上方失败步骤的日志了解详情"
