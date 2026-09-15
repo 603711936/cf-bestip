@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare IP 优选</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header .subtitle {
+            font-size: 1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+        .header .meta {
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        .download-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .download-section h2 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .download-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-align: center;
+            color: white;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .btn-primary {
+            background: #667eea;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        .btn-success {
+            background: #48bb78;
+        }
+        .btn-success:hover {
+            background: #38a169;
+        }
+        .btn-info {
+            background: #4299e1;
+        }
+        .btn-info:hover {
+            background: #3182ce;
+        }
+        .region-section {
+            margin-bottom: 30px;
+        }
+        .region-section h2 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .region-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .region-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .region-count {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+        .region-body {
+            padding: 20px;
+        }
+        .section-title {
+            font-size: 1em;
+            margin-bottom: 12px;
+            margin-top: 20px;
+            color: #333;
+            font-weight: 600;
+            border-left: 4px solid #667eea;
+            padding-left: 10px;
+        }
+        .section-title:first-child {
+            margin-top: 0;
+        }
+        .ip-list, .proxy-list {
+            margin-bottom: 15px;
+        }
+        .ip-item, .proxy-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: background 0.2s;
+        }
+        .proxy-item {
+            border-left-color: #48bb78;
+        }
+        .ip-item:hover, .proxy-item:hover {
+            background: #edf2f7;
+        }
+        .ip-item:last-child, .proxy-item:last-child {
+            margin-bottom: 0;
+        }
+        .ip-address {
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 1.05em;
+            color: #2d3748;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .ip-meta {
+            font-size: 0.85em;
+            color: #718096;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .badge-score {
+            background: #48bb78;
+            color: white;
+        }
+        .badge-latency {
+            background: #4299e1;
+            color: white;
+        }
+        .badge-colo {
+            background: #ed8936;
+            color: white;
+        }
+        .badge-type {
+            background: #9f7aea;
+            color: white;
+        }
+        .badge-source {
+            background: #718096;
+            color: white;
+        }
+        .region-downloads {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .region-download-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: white;
+        }
+        .region-download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            .region-grid {
+                grid-template-columns: 1fr;
+            }
+            .region-downloads {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 Cloudflare IP 优选</h1>
+            <div class="subtitle">多数据源 | HTTPS + SOCKS5 | API智能检测</div>
+            <div class="meta">更新时间: 2026-09-15 18:28:58 UTC</div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>总节点数</h3>
+                <div class="value">136</div>
+            </div>
+            <div class="stat-card">
+                <h3>覆盖地区</h3>
+                <div class="value">12</div>
+            </div>
+            <div class="stat-card">
+                <h3>代理总数</h3>
+                <div class="value">14</div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>📦 全局下载</h2>
+            <div class="download-grid">
+                <a href="ip_all.txt" class="download-btn btn-primary" download>
+                    🌍 所有IP列表
+                </a>
+                <a href="proxy_all.txt" class="download-btn btn-success" download>
+                    🔑 所有代理列表
+                </a>
+                <a href="ip_candidates.json" class="download-btn btn-info" download>
+                    📄 JSON数据
+                </a>
+            </div>
+        </div>
+
+        <div class="region-section">
+            <h2>🗺️ 地区详情</h2>
+            <div class="region-grid">
+                
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇨🇦 加拿大 (CA)</span>
+                <span class="region-count">10 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.18.240.167:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8398</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.170.112:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8283</span>
+                    <span class="badge badge-latency">延迟 40ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.235.25:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8242</span>
+                    <span class="badge badge-latency">延迟 38ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.94.37:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8215</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.67.171.160:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.5931</span>
+                    <span class="badge badge-latency">延迟 61ms</span>
+                    <span class="badge badge-colo">COLO PDX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.67.184.86:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.5849</span>
+                    <span class="badge badge-latency">延迟 59ms</span>
+                    <span class="badge badge-colo">COLO SJC</span>
+                </div>
+            </div>
+                </div>
+                
+            <div class="section-title">🔑 推荐代理 (6)</div>
+            <div class="proxy-list">
+                
+            <div class="proxy-item">
+                <div class="ip-address">68.71.254.6:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">703ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">198.8.84.3:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">855ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">68.71.252.38:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">858ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">68.71.251.134:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">900ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">68.71.242.118:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">952ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">192.111.129.145:16894</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">987ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">CA</span>
+                    
+                </div>
+            </div>
+            </div>
+                <div class="region-downloads">
+                    <a href="ip_CA.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_CA.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇩🇪 德国 (DE)</span>
+                <span class="region-count">7 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.17.198.16:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8502</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.25.149.57:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8468</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.39.57:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8259</span>
+                    <span class="badge badge-latency">延迟 39ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.144.154:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8174</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.17.164.13:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8174</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.17.187.83:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8149</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_DE.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_DE.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇫🇷 法国 (FR)</span>
+                <span class="region-count">13 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.17.227.71:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8549</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.6.137:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8451</span>
+                    <span class="badge badge-latency">延迟 30ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.17.87.74:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8378</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.30.203:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8363</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.66.173.88:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8303</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.17.137.43:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8207</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_FR.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_FR.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇬🇧 英国 (GB)</span>
+                <span class="region-count">9 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">141.101.113.229:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8319</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.89.253:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8215</span>
+                    <span class="badge badge-latency">延迟 39ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.142.169:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8191</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.26.0.243:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8115</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.26.7.107:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8107</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.134.214:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8008</span>
+                    <span class="badge badge-latency">延迟 43ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_GB.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_GB.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇭🇰 香港 (HK)</span>
+                <span class="region-count">10 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.17.156.32:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8496</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.21.190:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8453</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">108.162.195.207:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8405</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.66.146.112:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8381</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.27.3.111:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8336</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.65.208.10:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8132</span>
+                    <span class="badge badge-latency">延迟 38ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_HK.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_HK.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇮🇳 印度 (IN)</span>
+                <span class="region-count">13 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">172.66.173.139:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8374</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.25.153.243:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8328</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.66.196.105:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8326</span>
+                    <span class="badge badge-latency">延迟 38ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.9.122:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8303</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.17.39.203:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8174</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.214.138:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8132</span>
+                    <span class="badge badge-latency">延迟 38ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_IN.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_IN.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇮🇹 意大利 (IT)</span>
+                <span class="region-count">16 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.25.49.234:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8422</span>
+                    <span class="badge badge-latency">延迟 36ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.200.33:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8398</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.20.18.106:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8383</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.5.11:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8294</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.14.71:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8258</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.66.213.6:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8258</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_IT.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_IT.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇯🇵 日本 (JP)</span>
+                <span class="region-count">12 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">198.41.205.13:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8632</span>
+                    <span class="badge badge-latency">延迟 30ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.196.157:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8378</span>
+                    <span class="badge badge-latency">延迟 38ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.193.182:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8361</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.189.209:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8345</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.20.48.56:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8328</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.68.169:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8312</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_JP.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_JP.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇳🇱 荷兰 (NL)</span>
+                <span class="region-count">18 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.25.142.177:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8410</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.206.130:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8407</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.74.225:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8397</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.8.201:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8380</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.240.148:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8371</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.10.235:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8198</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+            <div class="section-title">🔑 推荐代理 (1)</div>
+            <div class="proxy-list">
+                
+            <div class="proxy-item">
+                <div class="ip-address">31.220.40.59:5080</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">1490ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">NL</span>
+                    
+                </div>
+            </div>
+            </div>
+                <div class="region-downloads">
+                    <a href="ip_NL.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_NL.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇷🇺 俄罗斯 (RU)</span>
+                <span class="region-count">7 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.16.15.80:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8351</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.16.28.136:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8338</span>
+                    <span class="badge badge-latency">延迟 32ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.217.156:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8266</span>
+                    <span class="badge badge-latency">延迟 39ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.0.193:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8241</span>
+                    <span class="badge badge-latency">延迟 35ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.25.125.47:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8241</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.168.105:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8223</span>
+                    <span class="badge badge-latency">延迟 41ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+                <div class="region-downloads">
+                    <a href="ip_RU.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_RU.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇸🇬 新加坡 (SG)</span>
+                <span class="region-count">12 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">104.19.56.221:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8405</span>
+                    <span class="badge badge-latency">延迟 34ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.25.203.127:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8293</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.140.237:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8231</span>
+                    <span class="badge badge-latency">延迟 40ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.25.229.190:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8208</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.26.10.7:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8140</span>
+                    <span class="badge badge-latency">延迟 33ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.217.114:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.8123</span>
+                    <span class="badge badge-latency">延迟 37ms</span>
+                    <span class="badge badge-colo">COLO LAX</span>
+                </div>
+            </div>
+                </div>
+                
+            <div class="section-title">🔑 推荐代理 (1)</div>
+            <div class="proxy-list">
+                
+            <div class="proxy-item">
+                <div class="ip-address">5.253.59.150:1082</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">1421ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">SG</span>
+                    
+                </div>
+            </div>
+            </div>
+                <div class="region-downloads">
+                    <a href="ip_SG.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_SG.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="region-header">
+                <span>🇺🇸 美国 (US)</span>
+                <span class="region-count">9 节点</span>
+            </div>
+            <div class="region-body">
+                <div class="section-title">📡 优选IP (6)</div>
+                <div class="ip-list">
+                    
+            <div class="ip-item">
+                <div class="ip-address">172.67.183.81:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.4051</span>
+                    <span class="badge badge-latency">延迟 265ms</span>
+                    <span class="badge badge-colo">COLO MCI</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.19.113.142:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.3929</span>
+                    <span class="badge badge-latency">延迟 303ms</span>
+                    <span class="badge badge-colo">COLO MIA</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.197.46:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.3797</span>
+                    <span class="badge badge-latency">延迟 307ms</span>
+                    <span class="badge badge-colo">COLO MIA</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">172.65.61.39:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.3782</span>
+                    <span class="badge badge-latency">延迟 313ms</span>
+                    <span class="badge badge-colo">COLO MIA</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.24.76.181:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.3748</span>
+                    <span class="badge badge-latency">延迟 314ms</span>
+                    <span class="badge badge-colo">COLO MIA</span>
+                </div>
+            </div>
+            <div class="ip-item">
+                <div class="ip-address">104.18.126.152:443</div>
+                <div class="ip-meta">
+                    <span class="badge badge-score">分数 0.3702</span>
+                    <span class="badge badge-latency">延迟 313ms</span>
+                    <span class="badge badge-colo">COLO MIA</span>
+                </div>
+            </div>
+                </div>
+                
+            <div class="section-title">🔑 推荐代理 (6)</div>
+            <div class="proxy-list">
+                
+            <div class="proxy-item">
+                <div class="ip-address">107.150.41.226:18080</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">518ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">45.32.160.61:1088</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">596ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">216.105.128.144:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">909ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">141.148.158.143:1080</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">959ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">43.135.176.121:1080</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">1013ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            <div class="proxy-item">
+                <div class="ip-address">199.66.182.232:4145</div>
+                <div class="ip-meta">
+                    <span class="badge badge-type">SOCKS5</span>
+                    <span class="badge badge-latency">1031ms</span>
+                    <span class="badge badge-source">proxifly</span>
+                    <span class="badge badge-colo">US</span>
+                    
+                </div>
+            </div>
+            </div>
+                <div class="region-downloads">
+                    <a href="ip_US.txt" class="region-download-btn btn-primary" download>📥 下载IP</a>
+                    <a href="proxy_US.txt" class="region-download-btn btn-success" download>🔑 下载代理</a>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Powered by Cloudflare IP Scanner V2.1</strong></p>
+            <p>🚀 多数据源聚合 | 智能API检测 | 自动化测试</p>
+            <p>支持地区: 加拿大 🇨🇦 | 德国 🇩🇪 | 法国 🇫🇷 | 英国 🇬🇧 | 香港 🇭🇰 | 印度 🇮🇳 | 意大利 🇮🇹 | 日本 🇯🇵 | 荷兰 🇳🇱 | 俄罗斯 🇷🇺 | 新加坡 🇸🇬 | 美国 🇺🇸</p>
+        </div>
+    </div>
+</body>
+</html>

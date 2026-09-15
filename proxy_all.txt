@@ -1,0 +1,14 @@
+68.71.254.6:4145#CA_703ms_proxifly
+198.8.84.3:4145#CA_855ms_proxifly
+68.71.252.38:4145#CA_858ms_proxifly
+68.71.251.134:4145#CA_900ms_proxifly
+68.71.242.118:4145#CA_952ms_proxifly
+192.111.129.145:16894#CA_987ms_proxifly
+31.220.40.59:5080#NL_1490ms_proxifly
+107.150.41.226:18080#US_518ms_proxifly
+45.32.160.61:1088#US_596ms_proxifly
+216.105.128.144:4145#US_909ms_proxifly
+141.148.158.143:1080#US_959ms_proxifly
+43.135.176.121:1080#US_1013ms_proxifly
+199.66.182.232:4145#US_1031ms_proxifly
+5.253.59.150:1082#SG_1421ms_proxifly
