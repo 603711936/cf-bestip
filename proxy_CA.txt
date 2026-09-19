@@ -1,0 +1,6 @@
+172.86.88.139:1081#CA_477ms_proxifly
+172.86.88.139:1085#CA_500ms_proxifly
+172.86.88.139:1082#CA_510ms_proxifly
+172.86.88.139:1080#CA_533ms_proxifly
+68.71.254.6:4145#CA_572ms_proxifly
+198.8.84.3:4145#CA_580ms_proxifly
