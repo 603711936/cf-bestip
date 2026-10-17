@@ -1,0 +1,1295 @@
+{
+  "meta": {
+    "generated_at": "2026-10-17T22:44:58.269531Z",
+    "total_nodes": 96,
+    "regions": {
+      "CA": 7,
+      "HK": 8,
+      "DE": 5,
+      "FR": 7,
+      "GB": 11,
+      "IN": 14,
+      "IT": 14,
+      "JP": 0,
+      "NL": 0,
+      "RU": 14,
+      "US": 5,
+      "SG": 11
+    },
+    "version": "2.1-single-domain",
+    "test_domain": "check.603711936.us.ci",
+    "proxy_check_method": "api",
+    "total_proxies": 29
+  },
+  "nodes": [
+    {
+      "ip": "104.17.181.123",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        33,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8541
+    },
+    {
+      "ip": "104.19.66.108",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        34,
+        40,
+        35
+      ],
+      "samples": 3,
+      "score": 0.846
+    },
+    {
+      "ip": "104.25.40.132",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        32,
+        35,
+        40
+      ],
+      "samples": 3,
+      "score": 0.8443
+    },
+    {
+      "ip": "172.67.153.121",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        36,
+        39,
+        35
+      ],
+      "samples": 3,
+      "score": 0.8441
+    },
+    {
+      "ip": "104.16.81.207",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        38,
+        38
+      ],
+      "samples": 3,
+      "score": 0.8403
+    },
+    {
+      "ip": "104.25.40.150",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        38,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8395
+    },
+    {
+      "ip": "104.17.93.89",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        38,
+        38
+      ],
+      "samples": 3,
+      "score": 0.8387
+    },
+    {
+      "ip": "104.18.187.61",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8378
+    },
+    {
+      "ip": "104.18.73.12",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        39
+      ],
+      "samples": 3,
+      "score": 0.836
+    },
+    {
+      "ip": "104.17.200.157",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        29,
+        37,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8354
+    },
+    {
+      "ip": "104.24.148.214",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        40
+      ],
+      "samples": 3,
+      "score": 0.8351
+    },
+    {
+      "ip": "104.19.61.4",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        37,
+        34,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8346
+    },
+    {
+      "ip": "104.19.151.190",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        33,
+        42
+      ],
+      "samples": 3,
+      "score": 0.8328
+    },
+    {
+      "ip": "104.24.238.246",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        34,
+        36,
+        52
+      ],
+      "samples": 3,
+      "score": 0.8322
+    },
+    {
+      "ip": "172.67.253.221",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        38,
+        35
+      ],
+      "samples": 3,
+      "score": 0.8319
+    },
+    {
+      "ip": "104.16.224.90",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        44,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8318
+    },
+    {
+      "ip": "172.67.133.235",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8318
+    },
+    {
+      "ip": "104.27.122.232",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8318
+    },
+    {
+      "ip": "104.18.100.98",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        32,
+        39
+      ],
+      "samples": 3,
+      "score": 0.831
+    },
+    {
+      "ip": "104.17.80.234",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        40,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8308
+    },
+    {
+      "ip": "162.159.153.53",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        45,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8303
+    },
+    {
+      "ip": "104.27.6.79",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        38,
+        46
+      ],
+      "samples": 3,
+      "score": 0.8301
+    },
+    {
+      "ip": "104.21.104.42",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        39,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8301
+    },
+    {
+      "ip": "104.25.52.241",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        49,
+        38,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8294
+    },
+    {
+      "ip": "104.20.37.155",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        35,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8285
+    },
+    {
+      "ip": "104.18.242.86",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        40,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8283
+    },
+    {
+      "ip": "104.18.114.205",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        42,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8283
+    },
+    {
+      "ip": "172.66.43.39",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        47,
+        36,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8276
+    },
+    {
+      "ip": "104.19.145.89",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        41,
+        41
+      ],
+      "samples": 3,
+      "score": 0.8274
+    },
+    {
+      "ip": "172.67.72.102",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        41,
+        41
+      ],
+      "samples": 3,
+      "score": 0.8274
+    },
+    {
+      "ip": "104.18.65.198",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        44,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8267
+    },
+    {
+      "ip": "104.18.183.255",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        47,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8267
+    },
+    {
+      "ip": "104.25.252.238",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        51,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8259
+    },
+    {
+      "ip": "104.19.118.225",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        49,
+        40,
+        39
+      ],
+      "samples": 3,
+      "score": 0.825
+    },
+    {
+      "ip": "104.24.41.238",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        43,
+        37,
+        41
+      ],
+      "samples": 3,
+      "score": 0.8249
+    },
+    {
+      "ip": "104.19.124.191",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        42,
+        42,
+        40
+      ],
+      "samples": 3,
+      "score": 0.8248
+    },
+    {
+      "ip": "104.17.74.59",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        39,
+        52,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8243
+    },
+    {
+      "ip": "104.19.171.14",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        50,
+        35,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8243
+    },
+    {
+      "ip": "104.19.19.48",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        46,
+        41,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8241
+    },
+    {
+      "ip": "104.21.19.217",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        41,
+        35,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8232
+    },
+    {
+      "ip": "104.27.76.254",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        43,
+        42,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8222
+    },
+    {
+      "ip": "104.18.225.197",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        41,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8207
+    },
+    {
+      "ip": "172.67.84.181",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        41,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8198
+    },
+    {
+      "ip": "104.25.178.33",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        43,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8189
+    },
+    {
+      "ip": "172.67.66.119",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        43,
+        43,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8181
+    },
+    {
+      "ip": "104.21.231.125",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        48,
+        42,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8174
+    },
+    {
+      "ip": "104.25.192.172",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        37,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8173
+    },
+    {
+      "ip": "162.159.2.217",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        40,
+        47,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8173
+    },
+    {
+      "ip": "104.17.219.103",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        54,
+        40,
+        34
+      ],
+      "samples": 3,
+      "score": 0.8167
+    },
+    {
+      "ip": "162.159.250.46",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        46,
+        38,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8165
+    },
+    {
+      "ip": "104.27.11.1",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        41,
+        44,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8164
+    },
+    {
+      "ip": "104.18.157.157",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        40,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8164
+    },
+    {
+      "ip": "104.21.54.60",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        55,
+        33,
+        40
+      ],
+      "samples": 3,
+      "score": 0.815
+    },
+    {
+      "ip": "172.64.89.116",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        48,
+        42,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8148
+    },
+    {
+      "ip": "104.18.233.82",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        48,
+        44,
+        42
+      ],
+      "samples": 3,
+      "score": 0.8148
+    },
+    {
+      "ip": "104.19.239.108",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        42,
+        38,
+        54
+      ],
+      "samples": 3,
+      "score": 0.8132
+    },
+    {
+      "ip": "172.67.200.61",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        43,
+        34,
+        47
+      ],
+      "samples": 3,
+      "score": 0.8123
+    },
+    {
+      "ip": "104.25.132.3",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        45,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8114
+    },
+    {
+      "ip": "104.16.56.95",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        32,
+        59,
+        40
+      ],
+      "samples": 3,
+      "score": 0.8108
+    },
+    {
+      "ip": "104.16.10.135",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        47,
+        36,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8107
+    },
+    {
+      "ip": "172.65.54.67",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        41,
+        45,
+        49
+      ],
+      "samples": 3,
+      "score": 0.8098
+    },
+    {
+      "ip": "104.16.66.156",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        38,
+        46,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8098
+    },
+    {
+      "ip": "162.159.194.126",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        35,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8082
+    },
+    {
+      "ip": "104.25.55.76",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        42,
+        46,
+        48
+      ],
+      "samples": 3,
+      "score": 0.8081
+    },
+    {
+      "ip": "173.245.49.223",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        41,
+        46,
+        47
+      ],
+      "samples": 3,
+      "score": 0.8081
+    },
+    {
+      "ip": "104.16.140.253",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        46,
+        35,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8073
+    },
+    {
+      "ip": "104.19.96.235",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        47,
+        40,
+        46
+      ],
+      "samples": 3,
+      "score": 0.8073
+    },
+    {
+      "ip": "104.18.154.195",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        47,
+        47
+      ],
+      "samples": 3,
+      "score": 0.8073
+    },
+    {
+      "ip": "104.19.242.94",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        49,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8065
+    },
+    {
+      "ip": "162.159.232.117",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        48,
+        40,
+        46
+      ],
+      "samples": 3,
+      "score": 0.8065
+    },
+    {
+      "ip": "104.24.151.107",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        59,
+        34,
+        42
+      ],
+      "samples": 3,
+      "score": 0.8058
+    },
+    {
+      "ip": "172.65.181.192",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        48,
+        39,
+        46
+      ],
+      "samples": 3,
+      "score": 0.8057
+    },
+    {
+      "ip": "104.25.206.214",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        49,
+        40,
+        46
+      ],
+      "samples": 3,
+      "score": 0.8057
+    },
+    {
+      "ip": "104.17.187.130",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        47,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8049
+    },
+    {
+      "ip": "104.19.6.210",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        51,
+        48,
+        47
+      ],
+      "samples": 3,
+      "score": 0.8032
+    },
+    {
+      "ip": "104.18.90.142",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        45,
+        34,
+        52
+      ],
+      "samples": 3,
+      "score": 0.8016
+    },
+    {
+      "ip": "172.67.153.84",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        50,
+        46,
+        35
+      ],
+      "samples": 3,
+      "score": 0.8008
+    },
+    {
+      "ip": "104.27.73.112",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        53,
+        33,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8
+    },
+    {
+      "ip": "104.19.238.184",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        46,
+        31,
+        48
+      ],
+      "samples": 3,
+      "score": 0.7992
+    },
+    {
+      "ip": "104.20.18.254",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        58,
+        37,
+        45
+      ],
+      "samples": 3,
+      "score": 0.7992
+    },
+    {
+      "ip": "104.19.228.140",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        55,
+        46,
+        48
+      ],
+      "samples": 3,
+      "score": 0.7992
+    },
+    {
+      "ip": "104.17.65.5",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        44,
+        54,
+        48
+      ],
+      "samples": 3,
+      "score": 0.7984
+    },
+    {
+      "ip": "104.18.247.178",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        41,
+        51,
+        48
+      ],
+      "samples": 3,
+      "score": 0.7984
+    },
+    {
+      "ip": "172.66.160.94",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        51,
+        37,
+        48
+      ],
+      "samples": 3,
+      "score": 0.7952
+    },
+    {
+      "ip": "104.16.18.219",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        54,
+        49,
+        34
+      ],
+      "samples": 3,
+      "score": 0.7871
+    },
+    {
+      "ip": "172.66.130.122",
+      "port": 443,
+      "region": "US",
+      "colo": "ATL",
+      "latencies": [
+        62,
+        60,
+        61
+      ],
+      "samples": 3,
+      "score": 0.7648
+    },
+    {
+      "ip": "172.66.131.212",
+      "port": 443,
+      "region": "US",
+      "colo": "ATL",
+      "latencies": [
+        62,
+        61,
+        63
+      ],
+      "samples": 3,
+      "score": 0.7618
+    },
+    {
+      "ip": "172.66.143.113",
+      "port": 443,
+      "region": "US",
+      "colo": "ATL",
+      "latencies": [
+        62,
+        67,
+        61
+      ],
+      "samples": 3,
+      "score": 0.7588
+    },
+    {
+      "ip": "172.66.135.43",
+      "port": 443,
+      "region": "US",
+      "colo": "ATL",
+      "latencies": [
+        80,
+        62,
+        62
+      ],
+      "samples": 3,
+      "score": 0.7496
+    },
+    {
+      "ip": "172.67.182.35",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        322,
+        310,
+        288,
+        47,
+        46,
+        42
+      ],
+      "samples": 6,
+      "score": 0.3918
+    },
+    {
+      "ip": "104.19.12.73",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        306,
+        302,
+        307,
+        38,
+        39,
+        47
+      ],
+      "samples": 6,
+      "score": 0.3904
+    },
+    {
+      "ip": "172.64.235.134",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        308,
+        297,
+        313,
+        49,
+        46,
+        38
+      ],
+      "samples": 6,
+      "score": 0.3887
+    },
+    {
+      "ip": "104.24.94.196",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        293,
+        313,
+        310,
+        55,
+        35,
+        38
+      ],
+      "samples": 6,
+      "score": 0.3861
+    },
+    {
+      "ip": "104.25.248.133",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        333,
+        302,
+        308,
+        49,
+        46,
+        43
+      ],
+      "samples": 6,
+      "score": 0.3782
+    },
+    {
+      "ip": "104.27.49.122",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        339,
+        292,
+        302,
+        46,
+        35,
+        44
+      ],
+      "samples": 6,
+      "score": 0.3772
+    },
+    {
+      "ip": "104.19.67.14",
+      "port": 443,
+      "region": "US",
+      "colo": "DFW",
+      "latencies": [
+        345,
+        292,
+        310,
+        47,
+        37,
+        35
+      ],
+      "samples": 6,
+      "score": 0.3735
+    }
+  ]
+}
