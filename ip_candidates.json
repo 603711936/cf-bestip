@@ -1,0 +1,1888 @@
+{
+  "meta": {
+    "generated_at": "2026-11-14T19:29:05.947004Z",
+    "total_nodes": 143,
+    "regions": {
+      "CA": 7,
+      "HK": 20,
+      "DE": 12,
+      "FR": 12,
+      "GB": 13,
+      "IN": 13,
+      "IT": 11,
+      "JP": 11,
+      "NL": 12,
+      "RU": 14,
+      "US": 6,
+      "SG": 12
+    },
+    "version": "2.1-single-domain",
+    "test_domain": "check.603711936.us.ci",
+    "proxy_check_method": "api",
+    "total_proxies": 21
+  },
+  "nodes": [
+    {
+      "ip": "104.21.11.41",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        23,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8951
+    },
+    {
+      "ip": "172.67.107.246",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        22,
+        21,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8928
+    },
+    {
+      "ip": "104.18.252.99",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        21,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8893
+    },
+    {
+      "ip": "104.24.14.107",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        25,
+        26
+      ],
+      "samples": 3,
+      "score": 0.888
+    },
+    {
+      "ip": "104.16.118.12",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        30,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8875
+    },
+    {
+      "ip": "172.66.211.100",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        25,
+        23
+      ],
+      "samples": 3,
+      "score": 0.8871
+    },
+    {
+      "ip": "104.25.198.106",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        23,
+        22
+      ],
+      "samples": 3,
+      "score": 0.887
+    },
+    {
+      "ip": "104.16.60.108",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        23,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8866
+    },
+    {
+      "ip": "104.18.117.176",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        32,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8857
+    },
+    {
+      "ip": "162.159.32.23",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        26,
+        26,
+        26
+      ],
+      "samples": 3,
+      "score": 0.885
+    },
+    {
+      "ip": "104.17.228.148",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        21,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8848
+    },
+    {
+      "ip": "104.16.169.200",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        25,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8836
+    },
+    {
+      "ip": "104.21.72.210",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        29,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8827
+    },
+    {
+      "ip": "104.16.165.228",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        31,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8827
+    },
+    {
+      "ip": "104.18.58.194",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        26,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8823
+    },
+    {
+      "ip": "104.21.208.118",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        29,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8814
+    },
+    {
+      "ip": "104.16.75.233",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        26,
+        23
+      ],
+      "samples": 3,
+      "score": 0.8814
+    },
+    {
+      "ip": "104.19.29.48",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        27,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8811
+    },
+    {
+      "ip": "104.20.11.22",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        24,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8805
+    },
+    {
+      "ip": "172.67.193.226",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        27,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8802
+    },
+    {
+      "ip": "104.24.19.180",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        26,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8796
+    },
+    {
+      "ip": "172.66.133.98",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        25,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8784
+    },
+    {
+      "ip": "104.25.136.134",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        27,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8784
+    },
+    {
+      "ip": "172.66.161.182",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        38,
+        25,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8773
+    },
+    {
+      "ip": "104.25.68.53",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        26,
+        26
+      ],
+      "samples": 3,
+      "score": 0.877
+    },
+    {
+      "ip": "172.64.148.38",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        22,
+        26,
+        31
+      ],
+      "samples": 3,
+      "score": 0.877
+    },
+    {
+      "ip": "162.159.41.38",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        28,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8763
+    },
+    {
+      "ip": "104.27.30.201",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        26,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8752
+    },
+    {
+      "ip": "104.17.106.59",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        32,
+        21,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8752
+    },
+    {
+      "ip": "104.16.241.110",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        28,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8746
+    },
+    {
+      "ip": "104.24.235.104",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        27,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8746
+    },
+    {
+      "ip": "104.18.249.218",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        31,
+        23
+      ],
+      "samples": 3,
+      "score": 0.874
+    },
+    {
+      "ip": "104.16.1.40",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        27,
+        27
+      ],
+      "samples": 3,
+      "score": 0.874
+    },
+    {
+      "ip": "104.16.254.51",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        40,
+        25,
+        23
+      ],
+      "samples": 3,
+      "score": 0.8738
+    },
+    {
+      "ip": "104.18.185.133",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        24,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8737
+    },
+    {
+      "ip": "104.16.38.136",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        26,
+        24,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8735
+    },
+    {
+      "ip": "104.18.60.222",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        28,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8728
+    },
+    {
+      "ip": "104.21.93.249",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        28,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8728
+    },
+    {
+      "ip": "104.24.53.14",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        32,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8728
+    },
+    {
+      "ip": "104.17.55.35",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        34,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8722
+    },
+    {
+      "ip": "104.24.135.33",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        25,
+        22,
+        41
+      ],
+      "samples": 3,
+      "score": 0.872
+    },
+    {
+      "ip": "104.16.137.58",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        29,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8716
+    },
+    {
+      "ip": "104.24.79.86",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        26,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8711
+    },
+    {
+      "ip": "104.25.188.188",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        34,
+        28,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8711
+    },
+    {
+      "ip": "104.21.29.176",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        41,
+        25,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8708
+    },
+    {
+      "ip": "104.24.247.16",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        32,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8707
+    },
+    {
+      "ip": "104.25.98.91",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        39,
+        27,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8705
+    },
+    {
+      "ip": "104.16.78.102",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        25,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8702
+    },
+    {
+      "ip": "172.67.234.98",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        29,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8699
+    },
+    {
+      "ip": "104.20.46.100",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        31,
+        26
+      ],
+      "samples": 3,
+      "score": 0.869
+    },
+    {
+      "ip": "104.18.24.75",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        34,
+        28,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8684
+    },
+    {
+      "ip": "104.16.127.216",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        29,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8678
+    },
+    {
+      "ip": "104.16.70.95",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        22,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8675
+    },
+    {
+      "ip": "104.17.158.68",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        41,
+        25,
+        27
+      ],
+      "samples": 3,
+      "score": 0.867
+    },
+    {
+      "ip": "104.21.121.147",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        30,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8664
+    },
+    {
+      "ip": "162.159.32.253",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        29,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8661
+    },
+    {
+      "ip": "104.17.163.176",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        30,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8652
+    },
+    {
+      "ip": "104.27.93.46",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        28,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8652
+    },
+    {
+      "ip": "104.25.251.133",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        30,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8652
+    },
+    {
+      "ip": "104.25.249.89",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        34,
+        30,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8652
+    },
+    {
+      "ip": "162.159.92.206",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        26,
+        40,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8649
+    },
+    {
+      "ip": "104.17.232.149",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        39,
+        25,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8649
+    },
+    {
+      "ip": "172.67.118.96",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        38,
+        29,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8646
+    },
+    {
+      "ip": "104.17.127.172",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        34,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8643
+    },
+    {
+      "ip": "162.159.139.100",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        26,
+        33
+      ],
+      "samples": 3,
+      "score": 0.8635
+    },
+    {
+      "ip": "104.16.15.152",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        35,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8635
+    },
+    {
+      "ip": "104.25.230.100",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        34,
+        27,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8635
+    },
+    {
+      "ip": "104.27.93.142",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        39,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8629
+    },
+    {
+      "ip": "104.17.192.115",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        23,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8629
+    },
+    {
+      "ip": "172.66.198.181",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        25,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8629
+    },
+    {
+      "ip": "104.19.240.194",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        31,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8617
+    },
+    {
+      "ip": "104.19.249.182",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        39,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8617
+    },
+    {
+      "ip": "162.159.17.30",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        27,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8615
+    },
+    {
+      "ip": "104.17.253.68",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        46,
+        28,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8614
+    },
+    {
+      "ip": "104.16.168.4",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        26,
+        36,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8609
+    },
+    {
+      "ip": "104.16.159.79",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        25,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8606
+    },
+    {
+      "ip": "104.19.160.56",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        32,
+        31,
+        26
+      ],
+      "samples": 3,
+      "score": 0.8606
+    },
+    {
+      "ip": "172.66.2.62",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        42,
+        29,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8603
+    },
+    {
+      "ip": "104.16.204.74",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        25,
+        49
+      ],
+      "samples": 3,
+      "score": 0.8599
+    },
+    {
+      "ip": "172.67.198.43",
+      "port": 443,
+      "region": "US",
+      "colo": "EWR",
+      "latencies": [
+        34,
+        27,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8597
+    },
+    {
+      "ip": "172.64.35.156",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        40,
+        28,
+        30
+      ],
+      "samples": 3,
+      "score": 0.8591
+    },
+    {
+      "ip": "162.159.20.233",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        27,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8589
+    },
+    {
+      "ip": "104.19.162.45",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        39,
+        31,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8589
+    },
+    {
+      "ip": "104.17.9.68",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        32,
+        33,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8586
+    },
+    {
+      "ip": "104.17.168.80",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        34,
+        30,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8586
+    },
+    {
+      "ip": "104.16.175.37",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        30,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8583
+    },
+    {
+      "ip": "104.25.229.8",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        47,
+        24,
+        28
+      ],
+      "samples": 3,
+      "score": 0.857
+    },
+    {
+      "ip": "104.17.156.157",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        22,
+        26,
+        54
+      ],
+      "samples": 3,
+      "score": 0.8566
+    },
+    {
+      "ip": "104.16.194.218",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        36,
+        21
+      ],
+      "samples": 3,
+      "score": 0.8565
+    },
+    {
+      "ip": "104.24.94.228",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        43,
+        30,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8565
+    },
+    {
+      "ip": "104.25.110.215",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        36,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8563
+    },
+    {
+      "ip": "104.24.251.119",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        30,
+        38,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8552
+    },
+    {
+      "ip": "172.64.153.64",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        32,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8552
+    },
+    {
+      "ip": "104.25.233.91",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        36,
+        31,
+        23
+      ],
+      "samples": 3,
+      "score": 0.8545
+    },
+    {
+      "ip": "104.16.84.232",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        36,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8543
+    },
+    {
+      "ip": "104.24.148.247",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        29,
+        32,
+        38
+      ],
+      "samples": 3,
+      "score": 0.8543
+    },
+    {
+      "ip": "104.25.95.90",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        31,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8541
+    },
+    {
+      "ip": "104.19.144.168",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        43,
+        30,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8539
+    },
+    {
+      "ip": "104.16.158.159",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        32,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8534
+    },
+    {
+      "ip": "172.67.90.102",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        33,
+        35
+      ],
+      "samples": 3,
+      "score": 0.8524
+    },
+    {
+      "ip": "104.19.123.247",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        32,
+        34
+      ],
+      "samples": 3,
+      "score": 0.8521
+    },
+    {
+      "ip": "104.24.8.123",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        41,
+        32,
+        29
+      ],
+      "samples": 3,
+      "score": 0.8517
+    },
+    {
+      "ip": "104.27.99.151",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        45,
+        30,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8513
+    },
+    {
+      "ip": "104.16.122.78",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        24,
+        34
+      ],
+      "samples": 3,
+      "score": 0.8498
+    },
+    {
+      "ip": "104.16.4.221",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        46,
+        31,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8491
+    },
+    {
+      "ip": "172.64.187.167",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        31,
+        45,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8485
+    },
+    {
+      "ip": "104.24.190.195",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        23,
+        39,
+        32
+      ],
+      "samples": 3,
+      "score": 0.8483
+    },
+    {
+      "ip": "104.25.155.62",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        55,
+        28,
+        22
+      ],
+      "samples": 3,
+      "score": 0.8482
+    },
+    {
+      "ip": "104.20.54.110",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        26,
+        38
+      ],
+      "samples": 3,
+      "score": 0.8481
+    },
+    {
+      "ip": "104.21.85.35",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        24,
+        22,
+        73
+      ],
+      "samples": 3,
+      "score": 0.8473
+    },
+    {
+      "ip": "104.17.13.179",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        25,
+        38
+      ],
+      "samples": 3,
+      "score": 0.8472
+    },
+    {
+      "ip": "104.19.204.10",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        46,
+        24,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8468
+    },
+    {
+      "ip": "104.17.52.165",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        35,
+        28
+      ],
+      "samples": 3,
+      "score": 0.8451
+    },
+    {
+      "ip": "104.19.246.195",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        40,
+        27,
+        34
+      ],
+      "samples": 3,
+      "score": 0.8436
+    },
+    {
+      "ip": "104.18.212.21",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        43,
+        33,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8421
+    },
+    {
+      "ip": "104.25.204.109",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        26,
+        41,
+        34
+      ],
+      "samples": 3,
+      "score": 0.8419
+    },
+    {
+      "ip": "104.18.162.219",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        38,
+        35,
+        27
+      ],
+      "samples": 3,
+      "score": 0.8417
+    },
+    {
+      "ip": "104.27.123.221",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        36,
+        39,
+        31
+      ],
+      "samples": 3,
+      "score": 0.8407
+    },
+    {
+      "ip": "172.65.61.27",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        39,
+        30,
+        36
+      ],
+      "samples": 3,
+      "score": 0.8398
+    },
+    {
+      "ip": "198.41.208.208",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        36,
+        36,
+        26
+      ],
+      "samples": 3,
+      "score": 0.839
+    },
+    {
+      "ip": "172.67.255.199",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        37,
+        38,
+        39
+      ],
+      "samples": 3,
+      "score": 0.8387
+    },
+    {
+      "ip": "104.24.54.119",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        32,
+        55
+      ],
+      "samples": 3,
+      "score": 0.8386
+    },
+    {
+      "ip": "104.19.6.203",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        36,
+        34,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8381
+    },
+    {
+      "ip": "104.16.32.28",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        36,
+        29,
+        44
+      ],
+      "samples": 3,
+      "score": 0.8347
+    },
+    {
+      "ip": "104.20.22.148",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        28,
+        34,
+        54
+      ],
+      "samples": 3,
+      "score": 0.8325
+    },
+    {
+      "ip": "172.66.160.148",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        35,
+        21,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8323
+    },
+    {
+      "ip": "104.17.124.87",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        53,
+        29,
+        35
+      ],
+      "samples": 3,
+      "score": 0.8306
+    },
+    {
+      "ip": "104.16.59.250",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        33,
+        50,
+        37
+      ],
+      "samples": 3,
+      "score": 0.8295
+    },
+    {
+      "ip": "104.25.129.184",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        43,
+        37,
+        25
+      ],
+      "samples": 3,
+      "score": 0.8287
+    },
+    {
+      "ip": "104.17.76.154",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        38,
+        38,
+        23
+      ],
+      "samples": 3,
+      "score": 0.8277
+    },
+    {
+      "ip": "104.25.228.4",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        39,
+        38,
+        24
+      ],
+      "samples": 3,
+      "score": 0.8277
+    },
+    {
+      "ip": "172.64.145.254",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        37,
+        42,
+        22
+      ],
+      "samples": 3,
+      "score": 0.827
+    },
+    {
+      "ip": "104.27.23.117",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        27,
+        38,
+        43
+      ],
+      "samples": 3,
+      "score": 0.8269
+    },
+    {
+      "ip": "172.67.86.108",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        37,
+        24,
+        45
+      ],
+      "samples": 3,
+      "score": 0.8262
+    },
+    {
+      "ip": "104.18.129.246",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        38,
+        48,
+        41
+      ],
+      "samples": 3,
+      "score": 0.8216
+    },
+    {
+      "ip": "104.21.69.116",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        72,
+        33,
+        40
+      ],
+      "samples": 3,
+      "score": 0.8008
+    },
+    {
+      "ip": "104.21.25.148",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        41,
+        28,
+        71
+      ],
+      "samples": 3,
+      "score": 0.7942
+    },
+    {
+      "ip": "104.21.213.222",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        48,
+        23,
+        46
+      ],
+      "samples": 3,
+      "score": 0.7927
+    },
+    {
+      "ip": "162.159.17.12",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        101,
+        34,
+        26
+      ],
+      "samples": 3,
+      "score": 0.7906
+    },
+    {
+      "ip": "172.67.185.242",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        87,
+        24,
+        43
+      ],
+      "samples": 3,
+      "score": 0.7712
+    },
+    {
+      "ip": "104.17.221.81",
+      "port": 443,
+      "region": "US",
+      "colo": "IAD",
+      "latencies": [
+        155,
+        166,
+        151,
+        25,
+        29,
+        23
+      ],
+      "samples": 6,
+      "score": 0.591
+    },
+    {
+      "ip": "162.159.160.228",
+      "port": 443,
+      "region": "UNMAPPED",
+      "colo": "DUB",
+      "latencies": [
+        220,
+        232,
+        220
+      ],
+      "samples": 3,
+      "score": 0.4705
+    },
+    {
+      "ip": "104.25.16.170",
+      "port": 443,
+      "region": "NL",
+      "colo": "AMS",
+      "latencies": [
+        468,
+        441,
+        448
+      ],
+      "samples": 3,
+      "score": 0.3003
+    }
+  ]
+}
