@@ -1,0 +1,6 @@
+107.181.168.145:4145#US_228ms_proxifly
+72.37.217.3:4145#US_232ms_proxifly
+199.102.107.145:4145#US_245ms_proxifly
+206.220.175.2:4145#US_280ms_proxifly
+69.55.49.177:38182#US_498ms_proxifly
+184.170.245.148:4145#US_684ms_proxifly
